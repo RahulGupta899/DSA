@@ -1,6 +1,5 @@
-import java.util.HashSet;
+import java.util.*;
 
-// Mid of a Linked list
 public class LinkedList{
 
     static class ListNode{
@@ -13,7 +12,10 @@ public class LinkedList{
         }
     }
 
-    // LC876 - 2nd mid
+    //----------------------------------------------------------
+    // Problem 1: Mid of a Linked list (second mid)   #LC876  
+    //----------------------------------------------------------
+    
     public static ListNode midOfList(ListNode head){
         if(head==null || head.next==null) 
             return head;
@@ -28,8 +30,11 @@ public class LinkedList{
         return slow;
     }
 
-    // Mid of List - 1st mid        // we use this mainly for solving
-    public static ListNode midOfList_firstNode(ListNode head){
+    //----------------------------------------------------------
+    // Problem 2: Mid of a Linked list (first mid)   
+    //----------------------------------------------------------
+
+    public static ListNode midOfList_firstNode(ListNode head){// primarily use this one
         if(head==null || head.next==null) 
             return head;
 
@@ -43,7 +48,9 @@ public class LinkedList{
         return slow;
     }
 
-    // Length of List
+    //----------------------------------------------------------
+    // Problem 3: Length of a linked list 
+    //----------------------------------------------------------
     public static int length(ListNode head){
         int c = 0;
         while(head!=null){
@@ -53,7 +60,10 @@ public class LinkedList{
         return c;
     }
 
-    // LC206
+    //----------------------------------------------------------
+    // Problem 4: Reverse Linked List               #LC206  
+    //----------------------------------------------------------
+
     public static ListNode reverseList(ListNode head) {
         if(head == null || head.next==null) return head;
 
@@ -70,7 +80,10 @@ public class LinkedList{
         return prev; 
     }
 
-    // LC234
+    //----------------------------------------------------------
+    // Problem 5: Palindrome Linked List               #LC234 
+    //----------------------------------------------------------
+
     public boolean isPalindrome(ListNode head) {
         ListNode midNode = midOfList_firstNode(head);
         ListNode nNode = midNode.next; // NewNode
@@ -89,7 +102,10 @@ public class LinkedList{
         return true;
     }
 
-    // LC143
+    //----------------------------------------------------------
+    // Problem 5: Reorder Linked List                #LC143
+    //----------------------------------------------------------
+
     public static void reorderList(ListNode head){
         if(head == null || head.next==null) return ;
         ListNode midNode = midOfList_firstNode(head);
@@ -110,7 +126,9 @@ public class LinkedList{
         }
     }
 
-    //LC21
+    //----------------------------------------------------------
+    // Problem 6: Merge two sorted Lists               #LC21 
+    //----------------------------------------------------------
     public static ListNode mergeTwoSortedList(ListNode head1, ListNode head2){
         
         ListNode dummy = new ListNode(Integer.MIN_VALUE);
@@ -136,7 +154,11 @@ public class LinkedList{
         return head;
     }
 
-    // unfold list - pepcoding
+
+    //----------------------------------------------------------
+    // Problem 7: unfold linked list            #pep 
+    //----------------------------------------------------------
+
     public static void unfold(ListNode head) {
         if(head == null || head.next==null) 
             return;
@@ -159,7 +181,10 @@ public class LinkedList{
         c1.next = rhead;
     }
 
-    // LC19
+    //----------------------------------------------------------
+    // Problem 8: Remove nth node from end              #LC19 
+    //----------------------------------------------------------
+
     public ListNode removeNthFromEnd(ListNode head, int n) {
 
         int sz = length(head);
@@ -202,7 +227,10 @@ public class LinkedList{
         return head;
     }// Tc: n
 
-    //  LC445: ADD Two Numbers II   
+    //----------------------------------------------------------
+    // Problem 9: Add two numbers II             #LC445
+    //----------------------------------------------------------  
+
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         l1 = reverseList(l1);
         l2 = reverseList(l2);
@@ -236,7 +264,10 @@ public class LinkedList{
         return resHead;    
     }
 
-    //substract list
+    //----------------------------------------------------------
+    // Problem 10: substract list               #pep 
+    //----------------------------------------------------------
+
     public static ListNode subtractTwoNumbers(ListNode l1, ListNode l2) {
             int cmptr = comparator(l1,l2);
             if(cmptr == -1){
@@ -285,23 +316,25 @@ public class LinkedList{
     }
 
     public static int comparator(ListNode l1, ListNode l2){
-    int len1 = length(l1);
-    int len2 = length(l2);
-    if(len1 < len2) return -1; // if less digits
-    else if(len1 > len2) return 1; 
-    else{
-        while(l1!=null && l2!=null){
-            if(l1.val<l2.val) return -1;
-            
-            l1 = l1.next;
-            l2 = l2.next;
+        int len1 = length(l1);
+        int len2 = length(l2);
+        if(len1 < len2) return -1; // if less digits
+        else if(len1 > len2) return 1; 
+        else{
+            while(l1!=null && l2!=null){
+                if(l1.val<l2.val) return -1;
+                
+                l1 = l1.next;
+                l2 = l2.next;
+            }
+            return 0;
         }
-        return 0;
+
     }
 
-}
-
-    // LC83 Remove Duplicates 
+    //----------------------------------------------------------
+    // Problem 11: Remove Duplicates from sorted list              #LC83 
+    //----------------------------------------------------------
     public ListNode deleteDuplicates(ListNode head) {
         if(head == null || head.next == null)  return head==null? null : head;
             
@@ -319,7 +352,11 @@ public class LinkedList{
         return head;
     }   // TC: 0(n)
 
-    //  LC82 Remove Duplicates from Sorted List II 
+
+    //----------------------------------------------------------
+    // Problem 12: Remove Duplicates from Sorted List II    #LC82
+    //----------------------------------------------------------
+
     public ListNode deleteDuplicatesII(ListNode head) {
         if(head==null || head.next==null) return head==null? null : head;
         ListNode dummy = new ListNode(-1);
@@ -341,7 +378,10 @@ public class LinkedList{
         return dummy.next;
     }
 
-    // LC328 Odd Even Linked List  
+    //----------------------------------------------------------
+    // Problem 13: Odd Even Linked List     #LC328
+    //----------------------------------------------------------
+
     public ListNode oddEvenList(ListNode head) {
         if(head==null || head.next==null) return head==null? null : head;
         
@@ -358,7 +398,10 @@ public class LinkedList{
         return head;
     }// TC: O(n/2); Sc: O(1);
 
-    // Segregate Even Odd 
+    //----------------------------------------------------------
+    // Problem 14: Segregate Odd Even           #pep
+    //----------------------------------------------------------
+
     public static ListNode segregateEvenOdd(ListNode head) {
         ListNode dummyOdd = new ListNode(-1);
         ListNode dummyEven = new ListNode(-1);
@@ -382,7 +425,10 @@ public class LinkedList{
         return dummyEven.next;
     }// TC: O(n), SC:O(1)
 
-    //  LC148 Sort List 
+    //----------------------------------------------------------
+    // Problem 14: Sort List                    #LC148
+    //----------------------------------------------------------
+
     public ListNode sortList(ListNode head) {
         if(head==null || head.next == null) return head==null? null : head;
         ListNode mid = midOfList_firstNode(head);
@@ -396,7 +442,10 @@ public class LinkedList{
         return fullSortedList;  
     } // TC: O(nlogn)
 
-    // Lc:23 Merge K sorted List
+    //----------------------------------------------------------
+    // Problem 15: Merge K sorted List              #LC23
+    //----------------------------------------------------------
+
     public ListNode mergeKLists_BF(ListNode[] lists) { // Brute force
         ListNode ans = null;
         for(ListNode list: lists){
@@ -423,7 +472,10 @@ public class LinkedList{
     }// T(k) = T(k/2)+T(k/2)+kl
      //      = 2T(k/2) + kl
 
-    // LC:25 Reverse Nodes in K Groups
+    //----------------------------------------------------------
+    // Problem 16: Reverse Nodes in K Groups        #LC25
+    //----------------------------------------------------------\
+
     class Solution {
     
     ListNode th=null, tt = null; // temp head, temp tail
@@ -475,7 +527,10 @@ public class LinkedList{
     }
 }
     
-    // LC: 92 Reverse List in between
+    //----------------------------------------------------------
+    // Problem 17: Reverse List in Between     #LC92
+    //----------------------------------------------------------
+
     public ListNode reverseBetween(ListNode head, int m, int n) {
         if(head == null || head.next == null|| m==n) return head;
         
@@ -522,7 +577,10 @@ public class LinkedList{
         }
     }
 
-    // LC: 203 Remove Linked List Elements
+    //----------------------------------------------------------
+    // Problem 18: Remove List elements             #LC203
+    //----------------------------------------------------------
+
     public ListNode removeElements(ListNode head, int val) {
         if(head == null ) return head;
         
@@ -540,7 +598,10 @@ public class LinkedList{
         return dummy.next;
     }
 
-    // LC: 817 Linked list components
+    //----------------------------------------------------------
+    // Problem 19: Linked List components           #LC817
+    //----------------------------------------------------------
+
     public int numComponents(ListNode head, int[] nums) {
         if(head == null) return 0;
         
@@ -562,7 +623,10 @@ public class LinkedList{
         
     }
 
-    // LC: 141 Linked List Cycle
+    //----------------------------------------------------------
+    // Problem 20: Linked List Cycle                #LC141
+    //----------------------------------------------------------
+
     public boolean hasCycle(ListNode head) {
         if(head==null || head.next == null) return false;
         
@@ -576,7 +640,10 @@ public class LinkedList{
         return false;
     }
 
-    // LC: 142 Linked list Cycle II - Find the Intersection
+    //----------------------------------------------------------------------
+    // Problem 21: Linked list cycle II - (find the intersection)   #LC142
+    //----------------------------------------------------------------------
+
     public ListNode detectCycle(ListNode head) {
         if(head==null || head.next == null) return null;
         
@@ -602,7 +669,10 @@ public class LinkedList{
         
     }
 
-    // LC: 160 Intersection of Two Linked Lists
+    //----------------------------------------------------------
+    // Problem 22: Intersection of Two Linked Lists    #LC160
+    //----------------------------------------------------------
+
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
         if(headA == null || headB == null) return null;
         
@@ -623,10 +693,12 @@ public class LinkedList{
         return curr;
     }
 
-    // LC: 138. Copy List with Random Pointer
-    // public Node copyRandomList(Node head) {
-        
-    // }
+    //----------------------------------------------------------
+    // Problem 23: Copy List with Random Pointer     #LC138
+    //----------------------------------------------------------
+    public Node copyRandomList(Node head) {
+        return null;
+    }
 }
 
 

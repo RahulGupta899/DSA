@@ -541,11 +541,84 @@ public class DynamicProg{
     // Problem 13: Goldmine                     #gfg         
     //---------------------------------------------------
 
+    public static int maxGold(int m, int n, int M[][]){
+        int max = 0;
+        int dirArr[][] = {{-1,-1},{0,-1},{1,-1}};
+        int dp[][] = new int[m][n];
+        for(int arr[]: dp) Arrays.fill(arr,-1);
+        // Memoized solution
+        // for(int r=0; r<m; r++){
+        //     max = Math.max(max, maxGold_memo(M,r,n-1,dirArr,dp));
+        // }
+
+        // Tabulized Solution
+        max = maxGold_Tabu(M,m-1,n-1,dirArr,dp);
+        return max;
+    }// 2^(m*n)
     
+    public static int maxGold_rec(int mine[][], int dr, int dc, int dirArr[][]){
+        if(dc==0){
+            return mine[dr][dc];
+        }
+        
+        int count = 0;
+        for(int d=0; d<dirArr.length; d++){
+            int r = dr+dirArr[d][0];
+            int c = dc+dirArr[d][1];
+            if(r>=0 && c>=0 && r<mine.length && c<mine[0].length){
+                count = Math.max(count,maxGold_rec(mine,r,c,dirArr));
+            }
+        }
+        return count+mine[dr][dc];
+    }//(m*n)
+    
+    public static int maxGold_memo(int mine[][], int dr, int dc, int dirArr[][],int dp[][]){
+        if(dc==0){
+            return dp[dr][dc] = mine[dr][dc];
+        }
+        
+        if(dp[dr][dc] != -1) return dp[dr][dc];
+        int count = 0;
+        for(int d=0; d<dirArr.length; d++){
+            int r = dr+dirArr[d][0];
+            int c = dc+dirArr[d][1];
+            if(r>=0 && c>=0 && r<mine.length && c<mine[0].length ){
+                count = Math.max(count,maxGold_memo(mine,r,c,dirArr,dp));
+            }
+        }
+        return dp[dr][dc] = count+mine[dr][dc];
+    }
+    
+    public static int maxGold_Tabu(int mine[][], int DR, int DC, int dirArr[][],int dp[][]){
+        int maxExtract = 0;
+        for(int dc=0; dc<=DC; dc++){ // column Fixed
+            for(int dr=0; dr<=DR; dr++){ // Row wise travel
+                if(dc==0){
+                    dp[dr][dc] = mine[dr][dc];
+                    if(dc==DC) maxExtract = Math.max(maxExtract,dp[dr][dc]);
+                    continue;
+                }
+                int maxCoin = 0;
+                for(int d=0; d<dirArr.length; d++){
+                    int r = dr+dirArr[d][0];
+                    int c = dc+dirArr[d][1];
+                    
+                    if(r>=0 && c>=0 && r<=DR && c<=DC){
+                        maxCoin = Math.max(maxCoin,dp[r][c]);
+                    }
+                }
+                dp[dr][dc] = maxCoin+mine[dr][dc];
+                if(dc==DC) maxExtract = Math.max(maxExtract,dp[dr][dc]);
+            }
+        }
+        return maxExtract;
+    }   // special Test Case: m=2, n=1 
+        // 1
+        // 2
 
     //---------------------------------------------------
     // Problem 13:Count the number of ways to divide N in k groups incrementally         #gfg          
-    //---------------------------------------------------
+    //---------------------------------------------------- 
 
 
 
